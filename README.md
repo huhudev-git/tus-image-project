@@ -83,8 +83,8 @@ flask run
 
 | name         | type   | description                    |
 | :----------- | :----- | :----------------------------- |
-| mosaic-type  | string | リクエストのモザイクのパターン |
-| mosaic-style | string | リクエストのモザイクのスタイル |
+| mosaic_type  | string | リクエストのモザイクのパターン |
+| mosaic_style | string | リクエストのモザイクのスタイル |
 | image        | blob   | 画像の内容                     |
 
 #### レスポンス
@@ -123,6 +123,13 @@ flask run
 > - [Blur and anonymize faces with OpenCV and Python](https://www.pyimagesearch.com/2018/02/26/face-detection-with-opencv-and-deep-learning/)
 > - [Face detection with OpenCV and deep learning](https://www.pyimagesearch.com/2020/04/06/blur-and-anonymize-faces-with-opencv-and-python/)
 
+`pixelate/face_detect/main.py`
+
+```py
+def face_detect(image: bytes) -> List[Position]:
+    pass
+```
+
 ### モザイクをつける
 
 一つのスタイル/パターンで、一つのクラスで実装する
@@ -134,45 +141,29 @@ flask run
 - 使うもの
   - OpenCV
 
-## クラスデザイン
-
-### 写真
-
-```py
-class Image():
-
-    def __init__(self, image_data):
-      self.data = image_data
-      self.processed_data = None
-
-    def get_size(self):
-      pass
-
-```
-
-### モザイクパターンクラス
-
-```py
-class MosaicPattern():
-
-    def __init__(self, pattern, style):
-        self.pattern = pattern
-        self.style = style
-```
-
-### モザイクフィルタークラス
+#### クラスデザイン
 
 ![-](README/filter-class.svg)
 
 ```py
 class AbstractMosaicFilter(abc.ABC):
-  
-  @abc.abstractmethod
-  def process(self, image) :
-    '''
-    写真を処理する
-    '''
-    pass
+
+    # フロントエンドのほうのモザイクパターンの名前
+    name = None
+
+    @abc.abstractmethod
+    def process(self, image: Image, style: AbstructMosaicStyle, positions: List[Position]) -> bytes:
+        '''写真を処理し、モザイクをつけた写真を返す
+
+        Args:
+            image (bytes): アップロードした写真
+            style (Any): モザイクのスタイル
+            positions (List[Position]): 顔認識の位置
+
+        Returns:
+            bytes: モザイクをつけた写真
+        '''
+        pass
 
 class EyesLineMosaicFilter(AbstractMosaicFilter):
   """
