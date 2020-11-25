@@ -70,6 +70,25 @@ git push -u origin feature/<自分で名前をつける>
 
 Pull Requestsを完成したあと、右側でReviewersをクリック、ほかの人にコードのレビューしてもらう。すべてレビューする人はOKだったら、main branchにmergeする
 
+---
+
+現在まだテストないので、作ったら、main branchにpushします、
+もしすでに自分作業のbranchを作ったら、そのときは自分のbranchにmergeお願いします。
+自分作業のbranchをmain branchを同期するコマンド↓
+
+```sh
+# 今の作業をセーブ
+git add . 
+git commit -m "save"
+
+git checkout main
+git pull
+git checkout <自分作業のbranch>
+git merge main
+```
+
+衝突があるかもしれません、そのときはmain branchに従うまたは自分で修正します
+
 ## Path
 
 ### `/`
