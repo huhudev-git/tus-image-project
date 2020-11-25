@@ -3,7 +3,6 @@
 ## 目的
 
 写真をアップロードし、顔認識して、顔の部分を自動的にモザイクにしてもらうウェブアプリケーション
-
 ## Framework
 
 - [Python 3.8.6](https://www.python.org/downloads/release/python-386/)
@@ -45,6 +44,31 @@ set FLASK_APP=pixelate
 
 flask run
 ```
+
+
+## 作業のながれ
+
+```sh
+git clone https://github.com/huhudev-git/tus-image-project.git
+cd tus-image-project
+
+# change branch
+git checkout -b feature/<自分で名前をつける>
+```
+
+ファイルを修正した後
+
+```sh
+git add .
+git commit -m "自分のメッセージ"
+git push -u origin feature/<自分で名前をつける>
+```
+
+そしてPull Requestsを作ってください。`feature/<自分で名前をつける>`というbranchで何回commitもできるので、Pull Requestsを作ったでも、修正はまだ追加できる。
+
+> 参考：[プルリクエストの作成方法](https://docs.github.com/ja/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request)
+
+Pull Requestsを完成したあと、右側でReviewersをクリック、ほかの人にコードのレビューしてもらう。すべてレビューする人はOKだったら、main branchにmergeする
 
 ## Path
 
