@@ -1,4 +1,3 @@
-
 from pixelate.models.position import Position
 from typing import List
 
