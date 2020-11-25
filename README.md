@@ -16,6 +16,36 @@
 
 今回データベースレイヤーがない、プレゼンテーションレイヤーとビジネスレイヤーしかない。大筋はリクエストをPython関数に渡し、Python関数の中に処理する、処理した結果を返す。
 
+## Usage
+
+```sh
+# clone the repository
+git clone https://github.com/huhudev-git/tus-image-project
+cd tus-image-project
+
+# create virtual environment
+python -m venv venv
+
+# linux
+source venv/bin/activate
+# win
+source venv/Scripts/activate
+
+# install denpandencies
+pip install -r requirements.txt
+```
+
+実行する
+
+```sh
+# linux
+export FLASK_APP=pixelate
+# windows
+set FLASK_APP=pixelate
+
+flask run
+```
+
 ## Path
 
 ### `/`
