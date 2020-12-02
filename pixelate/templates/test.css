@@ -1,0 +1,123 @@
+/*@media only screeen and (min-width: 1024px){*/
+/* base of button */
+    *,
+    *:before,
+    *:after{
+        -webkit-box-sizing: inherit;
+        box-sizing: inherit;
+    }
+
+    body {
+        /* background */
+        background: -moz-linear-gradient(top, #FFC778, #FFF);
+        background: -webkit-linear-gradient(top, #FFC778, #FFF);
+        background: linear-gradient(top, #FFC778, #FFF);    
+
+        /* button */
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        font-size: 62.5%;
+    }
+
+    /*slider*/
+    .slider_test {
+        /*スライドバー自体の横幅*/
+        width: 810px;
+        .slider {
+          -webkit-appearance: none;
+          margin: 14px 0;
+          width: 100%;
+          &:focus {
+            outline: none;
+            &::-webkit-slider-runnable-track {
+              background: #3f51b5;
+            }
+          }
+        /*スライドバーの横軸*/
+          &::-webkit-slider-runnable-track {
+            cursor: pointer;
+            background: #3f51b5;
+            border-radius: 1.3px;
+            height: 8px;
+            width: 100%;
+          }
+        /*スライドバーのつまみ*/
+          &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            background: #3f51b5;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            height: 36px;
+            margin-top: -14px;
+            width: 20px;
+          }
+        }
+      }
+      
+      
+      
+ 
+
+
+    /* draganddrop box */
+    #test2 {
+        background-color: #f4f4f4;
+        margin: 10px;
+        padding: 10px;
+        border: #ddd dashed 5px;
+        min-height: 200px;
+        text-align: center;
+    }
+
+    #test2 p {
+        color: #999;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    /* dragandgrop button*/
+
+    /* base of button */
+    /* <test3 class="btn btn_a "></test3>*/
+
+    test3.btn {
+        font-family: 'Impact';
+        font-size: 1.6rem;
+        font-weight: 700;
+        font-style: oblique ;
+        line-height: 1.5;
+      position: relative;
+      display: inline-block;
+      padding: 1rem 4rem;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+      text-align: center;
+      vertical-align: middle;
+      text-decoration: none;
+      letter-spacing: 0em;
+      color: #212529;
+      border-radius: 0.5rem;
+        margin: 0 auto;
+    }
+
+    test3.btn_a{
+        margin-top: 10;
+        color: #000;
+        background-color: #fff100;
+        border-bottom: 5px solid #ccc100; 
+    }
+
+    test3.btn_a:hover{
+        margin-top: 3px;
+        color: #000;
+        background: #fff20a;
+        border-bottom: 2px solid #ccc100;
+    }
+/*}*/
+
