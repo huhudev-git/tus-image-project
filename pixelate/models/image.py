@@ -7,7 +7,5 @@ class Image():
         self.data = image_data
 
     def get_from_io(self) -> io.BytesIO:
-        image_stream = io.BytesIO()
-        image_stream.write(self.data)
-        image_stream.seek(0)
+        image_stream = io.BytesIO(self.data)
         return image_stream
