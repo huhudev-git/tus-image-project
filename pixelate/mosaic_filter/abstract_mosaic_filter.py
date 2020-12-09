@@ -1,4 +1,5 @@
 import abc
+import io
 from typing import List
 
 from pixelate.models.image import Image
@@ -12,7 +13,7 @@ class AbstractMosaicFilter(abc.ABC):
     name = None
 
     @abc.abstractmethod
-    def process(self, image: Image, style: AbstructMosaicStyle, positions: List[Position]) -> bytes:
+    def process(self, image: Image, style: AbstructMosaicStyle, positions: List[Position]) -> io.BytesIO:
         '''写真を処理し、モザイクをつけた写真を返す
 
         Args:

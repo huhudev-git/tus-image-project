@@ -6,6 +6,11 @@ class EyesLineMosaicStyle(AbstructMosaicStyle):
     """目に黒い線をひくモザイクパターンのスタイルパラメータ
     """
 
+    line = 0
+
+    def __init__(self, line) -> None:
+        self.line = line
+
     @classmethod
     def from_json(cls, json_data) -> "EyesLineMosaicStyle":
-        return cls
+        return cls(json_data['line'])

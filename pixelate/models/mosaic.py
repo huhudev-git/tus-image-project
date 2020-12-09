@@ -1,4 +1,4 @@
-from typing import List
+from typing import Dict, List
 
 from pixelate.models.image import Image
 from pixelate.models.position import Position
@@ -28,7 +28,7 @@ class Mosaic():
         PixelBlurMosaicFilter.name: PixelBlurMosaicStyle,
     }
 
-    def __init__(self, pattern: str, style_data: str):
+    def __init__(self, pattern: str, style_data: Dict):
         self.pattern = pattern
 
         self._filter = self.get_filter()
@@ -40,7 +40,7 @@ class Mosaic():
             filter_ = GaussBlurMosaicFilter
         return filter_()
 
-    def get_style(self, style_data: str) -> AbstructMosaicStyle:
+    def get_style(self, style_data: Dict) -> AbstructMosaicStyle:
         style = self._styles.get(self.pattern, None)
         if style is None:
             style = GaussBlurMosaicStyle
