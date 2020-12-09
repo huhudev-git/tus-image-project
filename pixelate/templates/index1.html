@@ -1,0 +1,17 @@
+<html>
+
+<head>
+    <title>顔にモザイク！</title>
+</head>
+
+<body>
+    <form action="/upload-image" enctype="multipart/form-data" method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.image }}
+        {{ form.mosaic_pattern }}
+        {{ form.mosaic_style }}
+        <input type="submit" value="Go">
+    </form>
+</body>
+
+</html>

@@ -1,17 +1,69 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 
 <head>
-    <title>顔にモザイク！</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>モザイクAPI</title>
 </head>
 
 <body>
-    <form action="/upload-image" enctype="multipart/form-data" method="POST">
-        {{ form.hidden_tag() }}
-        {{ form.image }}
-        {{ form.mosaic_pattern }}
-        {{ form.mosaic_style }}
-        <input type="submit" value="Go">
+    <header>
+        <p>MosicFace</p>
+    </header>
+
+    <section class="carousel">
+        <ol class="carousel__viewport">
+            <li id="carousel__slide1" tabindex="0" class="carousel__slide">
+                <h1>Gauss</h1>
+
+                <div class="carousel__snapper">
+                    <a href="#carousel__slide3" class="carousel__prev">Go to last slide</a>
+                    <a href="#carousel__slide2" class="carousel__next">Go to next slide</a>
+                </div>
+
+                <div class="slider_test">
+                    <input id="slider_gauss" type="range" name="box" min="0" max="100" step="10">
+                </div>
+
+            </li>
+            <li id="carousel__slide2" tabindex="0" class="carousel__slide">
+                <h1>Pixel</h1>
+
+                <div class="carousel__snapper">
+                    <a href="#carousel__slide1" class="carousel__prev">Go to previous slide</a>
+                    <a href="#carousel__slide3" class="carousel__next">Go to next slide</a>
+                </div>
+
+                <div class="slider_test">
+                    <input id="slider_tile" type="range" name="box" min="0" max="100" step="10">
+                </div>
+
+            </li>
+            <li id="carousel__slide3" tabindex="0" class="carousel__slide">
+                <h1>Line on eyes</h1>
+
+                <div class="carousel__snapper">
+                    <a href="#carousel__slide2" class="carousel__prev">Go to previous slide</a>
+                    <a href="#carousel__slide1" class="carousel__next">Go to next slide</a>
+                </div>
+
+                <div class="slider_test">
+                    <input id="slider_" type="range" name="box" min="0" max="100" step="10">
+                </div>
+            </li>
+
+        </ol>
+    </section>
+
+    <form method="POST" enctype="multipart/form-data">
+        <div id="test2">
+            <div class="inside">
+                <p>ここにファイルをドロップ</p>
+            </div>
+        </div>
     </form>
+    <a href="after_upload.html" class="btn btn_a">Convert Now</a>
 </body>
 
 </html>
