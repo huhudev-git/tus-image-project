@@ -4,9 +4,9 @@
 
 ## Demo
 
-|           Gauss           |           Pixel           |           Eyes            |
-| :-----------------------: | :-----------------------: | :-----------------------: |
-| <img src="README/r1.png"> | <img src="README/r2.png"> | <img src="README/r3.png"> |
+|           Index           |           Gauss           |           Pixel           |           Eyes            |
+| :-----------------------: | :-----------------------: | :-----------------------: | :-----------------------: |
+| <img src="README/r0.png"> | <img src="README/r1.png"> | <img src="README/r2.png"> | <img src="README/r3.png"> |
 
 ## 目的
 
@@ -129,7 +129,7 @@ git merge main
 | name         | type   | description                    |
 | :----------- | :----- | :----------------------------- |
 | mosaic_type  | string | リクエストのモザイクのパターン |
-| mosaic_style | string | リクエストのモザイクのスタイル |
+| mosaic_style | json   | リクエストのモザイクのスタイル |
 | image        | blob   | 画像の内容                     |
 
 #### レスポンス
@@ -147,6 +147,8 @@ git merge main
 |               `/`               |        `/`(after upload)        |               全体               |
 | :-----------------------------: | :-----------------------------: | :------------------------------: |
 | ![-](README/mosaicface1-01.png) | ![-](README/mosaicface1-02.png) | ![-](README/enl_fz0uyaaaic2.jpg) |
+
+> デザインイメージ
 
 ## 機能
 
