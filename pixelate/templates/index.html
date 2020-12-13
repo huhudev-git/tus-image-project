@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dropzone.css') }}">
+    <script src="{{ url_for('static', filename='dropzone.js') }}"></script>
     <title>モザイクAPI</title>
 </head>
 
@@ -18,12 +20,13 @@
                 <h1>Gauss</h1>
 
                 <div class="carousel__snapper">
-                    <a href="#carousel__slide3" class="carousel__prev">Go to last slide</a>
-                    <a href="#carousel__slide2" class="carousel__next">Go to next slide</a>
+                    <a href="#carousel__slide3" class="carousel__prev" onclick='index--;'>Go to last slide</a>
+                    <img src="{{ url_for('static', filename='gaussian.png') }}" />
+                    <a href="#carousel__slide2" class="carousel__next" onclick='index++;'>Go to next slide</a>
                 </div>
 
                 <div class="slider_test">
-                    <input id="slider_gauss" type="range" name="box" min="0" max="100" step="10">
+                    <input id="slider_gauss" type="range" name="box" min="0" max="10" step="1">
                 </div>
 
             </li>
@@ -31,12 +34,13 @@
                 <h1>Pixel</h1>
 
                 <div class="carousel__snapper">
-                    <a href="#carousel__slide1" class="carousel__prev">Go to previous slide</a>
-                    <a href="#carousel__slide3" class="carousel__next">Go to next slide</a>
+                    <a href="#carousel__slide1" class="carousel__prev" onclick='index--;'>Go to previous slide</a>
+                    <img src="{{ url_for('static', filename='pixel.png') }}" />
+                    <a href="#carousel__slide3" class="carousel__next" onclick='index++;'>Go to next slide</a>
                 </div>
 
                 <div class="slider_test">
-                    <input id="slider_tile" type="range" name="box" min="0" max="100" step="10">
+                    <input id="slider_pixel" type="range" name="box" min="0" max="50" step="2">
                 </div>
 
             </li>
@@ -44,26 +48,120 @@
                 <h1>Line on eyes</h1>
 
                 <div class="carousel__snapper">
-                    <a href="#carousel__slide2" class="carousel__prev">Go to previous slide</a>
-                    <a href="#carousel__slide1" class="carousel__next">Go to next slide</a>
+                    <a href="#carousel__slide2" class="carousel__prev" onclick='index--;'>Go to previous slide</a>
+                    <img src="{{ url_for('static', filename='eyeline.png') }}" />
+                    <a href="#carousel__slide1" class="carousel__next" onclick='index++;'>Go to next slide</a>
                 </div>
 
                 <div class="slider_test">
-                    <input id="slider_" type="range" name="box" min="0" max="100" step="10">
+                    <input id="slider_eyes" type="range" name="box" min="0" max="100" step="2">
                 </div>
             </li>
 
         </ol>
     </section>
 
-    <form method="POST" enctype="multipart/form-data">
-        <div id="test2">
-            <div class="inside">
-                <p>ここにファイルをドロップ</p>
-            </div>
-        </div>
+    <form action="/upload-image" method="POST" class="dropzone" id="my-awesome-dropzone">
     </form>
-    <a href="after_upload.html" class="btn btn_a">Convert Now</a>
+
+    <a href="#" onclick="uplaod()" class="btn btn_a">Convert Now</a>
+
+    <script>
+        index = 900;
+
+        Dropzone.options.myAwesomeDropzone = {
+            paramName: "file",
+            maxFilesize: 4, // MB
+            init: function () {
+                this.on("addedfile", function () {
+                    if (this.files[1] != null) {
+                        this.removeFile(this.files[0]);
+                    }
+                });
+                this.on("sending", function (file, xhr, data) {
+                });
+            },
+            accept: function (file, done) {
+                if (file.name == "justinbieber.jpg") {
+                    done("Naha, you don't.");
+                }
+                else { done(); }
+            },
+        };
+
+        async function uplaod() {
+            let file = Dropzone.instances[0].files[0];
+            if (!file) {
+                alert('no image');
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append("image", file);
+
+            let i = index % 3;
+
+            switch (i) {
+                case 0:
+                    formData.append("mosaic_pattern", "gauss_blur");
+                    formData.append("mosaic_style", JSON.stringify({
+                        "level": document.getElementById('slider_gauss').value,
+                    }));
+                    break;
+                case 1:
+                    formData.append("mosaic_pattern", "pixel_blur");
+                    formData.append("mosaic_style", JSON.stringify({
+                        "level": document.getElementById('slider_pixel').value,
+                    }));
+                    break;
+                case 2:
+                    formData.append("mosaic_pattern", "eyes");
+                    formData.append("mosaic_style", JSON.stringify({
+                        "line": document.getElementById('slider_pixel').value,
+                    }));
+                    break;
+
+                default:
+                    break;
+            }
+
+            let r = await fetch('/upload-image', {
+                method: "POST",
+                body: formData
+            });
+
+            const img = document.querySelector("#result");
+            const arrayBuffer = await r.arrayBuffer();
+            const src = URL.createObjectURL(new Blob([arrayBuffer], { type: 'image/jpeg' }));
+
+            const html = `<!DOCTYPE html>
+            <html lang="ja">
+
+            <head>
+                <meta charset="utf-8">
+                <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+                <title>モザイクAPI</title>
+            </head>
+
+            <body>
+                <header>
+                    <p>MosicFace</p>
+                </header>
+
+                <section class="change_image">
+                    <img src="${src}" width="600px">
+                </section>
+
+                <a download="result.jpg" href="${src}" class="btn btn_a">Download</a>
+                <a href="/" class="btn btn_b">Back</a>
+            </body>
+
+            </html>`;
+
+            document.write(html);
+        }
+    </script>
+
 </body>
 
 </html>

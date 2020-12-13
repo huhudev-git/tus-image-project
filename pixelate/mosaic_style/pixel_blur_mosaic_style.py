@@ -5,6 +5,11 @@ class PixelBlurMosaicStyle(AbstructMosaicStyle):
     """ピクセルモザイクパターンのスタイルパラメータ
     """
 
+    level = None
+
+    def __init__(self, level) -> None:
+        self.level = int(level)
+
     @classmethod
     def from_json(cls, json_data) -> "PixelBlurMosaicStyle":
-        return cls()
+        return cls(json_data['level'])

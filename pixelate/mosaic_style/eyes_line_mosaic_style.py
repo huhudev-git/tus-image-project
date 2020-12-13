@@ -9,7 +9,7 @@ class EyesLineMosaicStyle(AbstructMosaicStyle):
     line = 0
 
     def __init__(self, line) -> None:
-        self.line = line
+        self.line = int(line)
 
     @classmethod
     def from_json(cls, json_data) -> "EyesLineMosaicStyle":

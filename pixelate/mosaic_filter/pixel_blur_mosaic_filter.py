@@ -23,6 +23,27 @@ class PixelBlurMosaicFilter(BlurMosaicFilter):
         file_bytes = np.asarray(bytearray(image_stream.read()), dtype=np.uint8)
         img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
 
+        # Yamagishi Kanata | below
+        for position in positions:
+            h, w, c = img[
+                position.startX:position.endX,
+                position.startY:position.endY,
+            ].shape
+
+            resize = cv2.resize(
+                img[
+                    position.startX:position.endX,
+                    position.startY:position.endY
+                ],
+                (int(w*100/h) // style.level, 100 // style.level),
+                interpolation=cv2.INTER_NEAREST
+            )
+
+            img[
+                position.startX:position.endX,
+                position.startY:position.endY
+            ] = cv2.resize(resize, (w, h), interpolation=cv2.INTER_NEAREST)
+
         is_success, buffer = cv2.imencode(".jpg", img)
         if is_success:
             io_buf = io.BytesIO(buffer)

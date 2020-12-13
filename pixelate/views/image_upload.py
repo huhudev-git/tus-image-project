@@ -24,15 +24,18 @@ def handle_upload_image():
         mosaic_style = form.mosaic_style.data
         try:
             mosaic_style = json.loads(mosaic_style)
+            mosaic = Mosaic(mosaic_pattern, mosaic_style)
         except json.decoder.JSONDecodeError:
             return b""
-        mosaic = Mosaic(mosaic_pattern, mosaic_style)
+        except ValueError:
+            return b""
 
         # find face pos
         if mosaic_pattern == "eyes":
-            positions = eye_detect(image)
+            detect = eye_detect
         else:
-            positions = face_detect(image)
+            detect = face_detect
+        positions = detect(image)
 
         # embedded mosaic
         processed_image = mosaic.filter_interface(image, positions)

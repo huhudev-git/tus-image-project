@@ -25,6 +25,27 @@ class GaussBlurMosaicFilter(BlurMosaicFilter):
         file_bytes = np.asarray(bytearray(image_stream.read()), dtype=np.uint8)
         img = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
 
+        # Yamagishi Kanata | below
+        for position in positions:
+            h, w, c = img[
+                position.startX:position.endX,
+                position.startY:position.endY,
+            ].shape
+
+            target = cv2.resize(img[
+                position.startX:position.endX,
+                position.startY:position.endY],
+                (int(w*100/h), 100)
+            )
+
+            for _ in range(1, style.level):
+                target = cv2.GaussianBlur(target, (5, 5), 10)
+
+            img[
+                position.startX: position.endX,
+                position.startY:position.endY,
+            ] = cv2.resize(target, (w, h))
+
         is_success, buffer = cv2.imencode(".jpg", img)
         if is_success:
             io_buf = io.BytesIO(buffer)
