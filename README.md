@@ -1,4 +1,12 @@
-# 要件定義
+# TUS Image Project
+
+これは学校の課題です
+
+## Demo
+
+|           Gauss           |           Pixel           |           Eyes            |
+| :-----------------------: | :-----------------------: | :-----------------------: |
+| <img src="README/r1.png"> | <img src="README/r2.png"> | <img src="README/r3.png"> |
 
 ## 目的
 
@@ -13,7 +21,7 @@
 <img src="README/web-application-architecture.png" width=400px>
 </center>
 
-今回データベースレイヤーがない、プレゼンテーションレイヤーとビジネスレイヤーしかない。大筋はリクエストをPython関数に渡し、Python関数の中に処理する、処理した結果を返す。
+データベースレイヤーがない、プレゼンテーションレイヤーとビジネスレイヤーしかない。大筋はリクエストをPython関数に渡し、Python関数の中に処理する、処理した結果を返す。
 
 ## Usage
 
@@ -69,12 +77,6 @@ git push -u origin feature/<自分で名前をつける>
 > 参考：[プルリクエストの作成方法](https://docs.github.com/ja/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request)
 
 Pull Requestsを完成したあと、右側でReviewersをクリック、ほかの人にコードのレビューしてもらう。すべてレビューする人はOKだったら、main branchにmergeする
-
----
-
-現在まだテストないので、作ったら、main branchにpushします、
-もしすでに自分作業のbranchを作ったら、そのときは自分のbranchにmergeお願いします。
-自分作業のbranchをmain branchを同期するコマンド↓
 
 ```sh
 # 今の作業をセーブ
@@ -151,17 +153,9 @@ git merge main
 ### 顔認識
 
 - OpenCV
-  - Haar cascades
-  - HOG + Linear SVM
-  - Deep learning-based face detectors.
+  - Viola & Johns 顔検出器
 
 返すもの `List[Position]`
-
-- Position
-  - The starting x-coordinate of the face bounding box
-  - The ending x-coordinate of the face
-  - The starting y-coordinate of the face location
-  - The ending y-coordinate of the face
 
 > - [Blur and anonymize faces with OpenCV and Python](https://www.pyimagesearch.com/2018/02/26/face-detection-with-opencv-and-deep-learning/)
 > - [Face detection with OpenCV and deep learning](https://www.pyimagesearch.com/2020/04/06/blur-and-anonymize-faces-with-opencv-and-python/)
@@ -169,7 +163,7 @@ git merge main
 `pixelate/face_detect/main.py`
 
 ```py
-def face_detect(image: bytes) -> List[Position]:
+def face_detect(image: Image) -> List[Position]:
     pass
 ```
 
