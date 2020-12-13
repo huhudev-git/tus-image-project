@@ -1,4 +1,3 @@
-import io
 from flask import send_file, Blueprint
 import json
 
@@ -22,6 +21,7 @@ def handle_upload_image():
         # get mosaic type params
         mosaic_pattern = form.mosaic_pattern.data
         mosaic_style = form.mosaic_style.data
+        
         try:
             mosaic_style = json.loads(mosaic_style)
             mosaic = Mosaic(mosaic_pattern, mosaic_style)
@@ -35,10 +35,13 @@ def handle_upload_image():
             detect = eye_detect
         else:
             detect = face_detect
-        positions = detect(image)
 
-        # embedded mosaic
-        processed_image = mosaic.filter_interface(image, positions)
+        try:
+            positions = detect(image)
+            # embedded mosaic
+            processed_image = mosaic.filter_interface(image, positions)
+        except Exception:
+            return b""
 
         return send_file(
             processed_image,

@@ -37,13 +37,13 @@ class Mosaic():
     def get_filter(self) -> AbstractMosaicFilter:
         filter_ = self._filters.get(self.pattern, None)
         if filter_ is None:
-            filter_ = GaussBlurMosaicFilter
+            return GaussBlurMosaicFilter()
         return filter_()
 
     def get_style(self, style_data: Dict) -> AbstructMosaicStyle:
         style = self._styles.get(self.pattern, None)
         if style is None:
-            style = GaussBlurMosaicStyle
+            return GaussBlurMosaicStyle.from_json({"level": 1})
         return style.from_json(style_data)
 
     def filter_interface(self, image: Image, positions: List[Position]) -> bytes:
