@@ -6,7 +6,7 @@
 
 |           Index           |           Gauss           |           Pixel           |           Eyes            |
 | :-----------------------: | :-----------------------: | :-----------------------: | :-----------------------: |
-| <img src="README/r0.png"> | <img src="README/r1.png"> | <img src="README/r2.png"> | <img src="README/r3.png"> |
+| <img src="README/r0.png"> | <img src="README/r2.png"> | <img src="README/r3.png"> | <img src="README/r1.png"> |
 
 ## 目的
 
