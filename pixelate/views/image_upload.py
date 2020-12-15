@@ -21,7 +21,7 @@ def handle_upload_image():
         # get mosaic type params
         mosaic_pattern = form.mosaic_pattern.data
         mosaic_style = form.mosaic_style.data
-        
+
         try:
             mosaic_style = json.loads(mosaic_style)
             mosaic = Mosaic(mosaic_pattern, mosaic_style)
@@ -31,7 +31,7 @@ def handle_upload_image():
             return b""
 
         # find face pos
-        if mosaic_pattern == "eyes":
+        if mosaic_pattern.startswith("eyes"):
             detect = eye_detect
         else:
             detect = face_detect
